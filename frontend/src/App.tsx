@@ -9,10 +9,20 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { useState } from "react";
 
 export default function App() {
+  const [darkMode,setDarkMode]=useState(false);
+
+  const toggleDarkMode=()=>{
+    setDarkMode(!darkMode);
+  }
+
+
   return (
-    <section>
+<div className={`${darkMode && "dark"}`}>
+<main className="flex min-h-screen flex-col p-12  dark:bg-neutral-800">
+<section >
   <Router>
     <EntryProvider>
     <NavBar></NavBar>
@@ -27,6 +37,13 @@ export default function App() {
     </EntryProvider>
     </Router>
     </section>
-    
+    <button className='absolute w-20 h-20 bottom-20 right-20 rounded-full
+     bg-neutral-800 dark:bg-neutral-50 text-white dark:text-black'
+     onClick={toggleDarkMode}
+     >
+      {darkMode ? "Light": "Dark"}
+    </button>
+    </main>
+    </div>
   );
 }
